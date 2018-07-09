@@ -1,8 +1,6 @@
 import ActionTypes from '../actions/authActionsTypes';
 import jwt_decode from 'jwt-decode';
 
-console.log(ActionTypes);
-
 const InitialState = {
     jwt: "",
     data: {},

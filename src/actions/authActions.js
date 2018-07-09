@@ -3,7 +3,7 @@ import ActionTypes from './authActionsTypes';
 
 export function authenticate() {
     return function (dispatch) {
-        return axios.get('http://php-docker.local/api/auth/v1/auth')
+        return axios.get(process.env.REACT_APP_AUTH_URL_AUTH)
             .then((response) => {
                 dispatch(authenticateResult(response.data.token));
                 return Promise.resolve();
@@ -27,7 +27,7 @@ export function login(login, password) {
         dispatch({
             type: ActionTypes.REGISTER
         });
-        return axios.get('http://php-docker.local/api/auth/v1/login?login='+login+'&password='+password)
+        return axios.get(process.env.REACT_APP_AUTH_URL_LOGIN + '?login='+login+'&password='+password)
             .then(response => {
                 dispatch(authenticateResult(response.data.token));
                 return Promise.resolve();
@@ -56,7 +56,7 @@ export function register(username, password) {
         dispatch({
             type: ActionTypes.REGISTER
         });
-        return axios.post('http://php-docker.local/api/auth/v1/register',{username, password})
+        return axios.post(process.env.REACT_APP_AUTH_URL_REGISTER,{username, password})
             .then(response => {
                 dispatch(login(username,password));
 
